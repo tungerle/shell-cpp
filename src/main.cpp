@@ -13,8 +13,8 @@ int main() {
   if (input == "exit 0"){
     break;
   }
-  else if (input.compare(0, 5, "echo ") == 0){
-    std::cout <<input.substr(6) <<std::endl;
+  else if (input.compare(0, 4, "echo ") == 0){
+    std::cout <<input.substr(5) <<std::endl;
   }
   else {
   std::cout << input << ": command not found" <<std::endl;
