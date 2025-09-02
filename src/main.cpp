@@ -19,7 +19,7 @@ int main() {
     std::cout <<input.substr(5) <<std::endl;
   }
 
-  else if (input.compare(0, 5, "type") == 0) {
+  else if (input.compare(0, 4, "type") == 0) {
     if (input == "type echo") {
       std::cout << "echo is a shell builtin" <<std::endl;
     }
