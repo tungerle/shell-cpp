@@ -31,7 +31,7 @@ int main() {
       std::cout<< "type is a shell builtin" <<std::endl;
     }
     else {
-      std::cout << "invalid_command: not found" << std::endl;
+      std::cout << input.substr(5) << ": not found" << std::endl;
     }
   }
   // invalid command
