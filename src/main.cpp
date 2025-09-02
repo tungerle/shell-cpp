@@ -26,7 +26,9 @@ int main() {
     else if (input == "type exit"){
       std::cout<< "exit is a shell builtin" <<std::endl;
     }
-  }
+    else if (input == "type type"){
+      std::cout<< "type is a shell builtin" <<std::endl;
+    }
 
   else {
   std::cout << input << ": command not found" <<std::endl;
