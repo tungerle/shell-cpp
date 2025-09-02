@@ -13,7 +13,7 @@ int main() {
   if (input == "exit 0"){
     break;
   }
-  else if (input.compare(0, 4, "echo ") == 0){
+  else if (input.compare(0, 5, "echo ") == 0){
     std::cout <<input.substr(5) <<std::endl;
   }
   else {
