@@ -32,9 +32,8 @@ int main() {
 
   else {
   std::cout << input << ": command not found" <<std::endl;
-  }
-
-} // end While loop
-
+    }
+  } 
+} // end while loop
 return 0;
 }
