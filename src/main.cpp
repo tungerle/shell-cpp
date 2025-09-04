@@ -56,13 +56,11 @@ int main() {
           }
       }
     }
-    break;
   }
   // invalid command
   else {
   std::cout << input << ": command not found" <<std::endl;
     }
-   
   } // end while loop
 return 0;
 }
