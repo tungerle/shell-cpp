@@ -6,6 +6,8 @@
 #include <vector>
 #include <unistd.h>
 #include <sys/types.h>
+#include <cstring>
+#include <sys/wait.h>
 
 std::set<std::string> builtins = {"echo", "exit", "type"};
 int main() {
@@ -102,7 +104,7 @@ int main() {
       }
 
     }
-    
+
   } // end while loop
 
 return 0;
