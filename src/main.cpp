@@ -63,7 +63,11 @@ int main() {
       }
     }
 
+    else if (input == "pwd"){
+      char *buffer = getcwd(NULL, 0);
 
+      std::cout << buffer << std::endl;
+    }
     // look for non builtin command in path
     else {
       bool found = false;
