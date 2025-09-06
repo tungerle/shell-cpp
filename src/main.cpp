@@ -9,7 +9,7 @@
 #include <cstring>
 #include <sys/wait.h>
 
-std::set<std::string> builtins = {"echo", "exit", "type"};
+std::set<std::string> builtins = {"echo", "exit", "type", "pwd", "cd"};
 int main() {
 
   // Flush after every std::cout / std:cerr
@@ -25,11 +25,20 @@ int main() {
     directories_split.push_back(buffer);
   }
 
+  
   // get user's input
   while (true) {
     std::cout << "$ ";
     std::string input;
     std::getline(std::cin, input);
+
+    //store input as a c-string in input_vector
+    std::istringstream input_stream(input);
+    std::vector<char*> input_vector; 
+    while(input_stream >> buffer){
+      input_vector.push_back(strdup(buffer.c_str()));
+    }
+    input_vector.push_back(nullptr);
 
     // exit
     if (input == "exit 0"){
@@ -47,6 +56,7 @@ int main() {
       if (builtins.count(name)) {
         std::cout << name << " is a shell builtin" <<std::endl;
       }
+
       // search for command
       else { 
         for (int i=0; i < size(directories_split); i++){ 
@@ -63,20 +73,28 @@ int main() {
       }
     }
 
+    // pwd
     else if (input == "pwd"){
-      char *buffer = getcwd(NULL, 0);
+      char *cwd = getcwd(NULL, 0);
 
-      std::cout << buffer << std::endl;
+      std::cout << cwd << std::endl;
+      free(cwd);
     }
-    // look for non builtin command in path
+    
+    //cd
+    else if (input.compare(0,3, "cd ") == 0){
+      if (input.substr(3) == "~"){
+        char *home = getenv("HOME");
+        chdir(home);
+      }
+      else if (chdir(input_vector[1]) != 0){
+        std::cout<< input.substr(3) + ": No such file or directory"<<std::endl;
+      }
+    }
+
+    // look for non builtin command from path, start process
     else {
       bool found = false;
-      std::istringstream input_stream(input);
-      std::vector<char*> input_vector; 
-      while(input_stream >> buffer){
-        input_vector.push_back(strdup(buffer.c_str()));
-      }
-      input_vector.push_back(nullptr);
       char **argv = input_vector.data();
       for (auto &directory : directories_split){
           std::string command_path = directory + "/" + input_vector[0];
