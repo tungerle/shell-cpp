@@ -13,4 +13,4 @@ Make sure you have `clang++` installed.
 
 build manually: 
 
-clang++ -std=c++2b -o my_shell main.cpp
+clang++ -std=c++2b -o src/main.cpp shell
